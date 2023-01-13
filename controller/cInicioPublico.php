@@ -1,6 +1,9 @@
 <?php
 if(isset($_REQUEST['login'])){
-    echo "hola";
+    $_SESSION['paginaEnCurso'] = 'login';
+
+    header("Location: ./index.php");
+    exit();
 }
 require_once "$aVista[layout]";
 ?>
