@@ -5,6 +5,8 @@
     /*Config*/
     require_once('./config/confDBPDO.php');
     /*Modelo*/
+    require_once('./model/usuario.php');
+    require_once('./model/UsuarioPDO.php');
     //require_once('');
     /*Controlador*/
     $aControlador = [

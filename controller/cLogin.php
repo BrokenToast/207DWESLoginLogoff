@@ -42,25 +42,19 @@ if (isset($_REQUEST['enviar'])) {
             $ok = false;
         }
     }
-
     if ($ok) {
-        $oConector = new processDB(DSNMYSQL, USER, PASSWORD);
-        $aRespuesta = $oConector->executeQuery("SELECT * FROM T01_Usuario WHERE T01_CodUsuario=\"$_REQUEST[usuario]\" AND  T01_Password=SHA2(concat(\"$_REQUEST[usuario]\",\"$_REQUEST[password]\"),256)");
-        if ($aRespuesta) {
-            session_start();
-            $_SESSION['usuario'] = $aRespuesta;
+        $oRespuesta = UsuarioPDO::validadUsuario($_REQUEST['usuario'], $_REQUEST['password']);
+        if (!is_null($oRespuesta)) {
+            $_SESSION['usuarioMiAplicacion'] = $oRespuesta;
+            $_SESSION['codUsuarioEnCurso'] = $oRespuesta->getCodUsuario();
+            //Idioma
             if (isset($_COOKIE['idioma']) && $_REQUEST['idioma'] == $_COOKIE['idioma']) {
                 $_SESSION['idioma'] = $_COOKIE['idioma'];
             } else {
                 setcookie('idioma', $_REQUEST['idioma']);
                 $_SESSION['idioma'] = $_REQUEST['idioma'];
             }
-            $datosUpdate = [
-                'T01_FechaHoraUltimaConexion' => time(),
-                "T01_NumConexiones" => "1+T01_NumConexiones"
-            ];
-            $oConector->executeUpdate("T01_Usuario", $datosUpdate, "T01_CodUsuario='$_REQUEST[usuario]'");
-
+            //
             $_SESSION['paginaEnCurso'] = 'programa';
             header("Location: ./index.php");
         }

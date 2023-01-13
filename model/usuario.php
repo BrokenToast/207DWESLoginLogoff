@@ -1,21 +1,25 @@
 <?php
-    
 class Usuario{
-    private $codUsuario;
-    private $password;
-    private $descUsuario;
-    private $numAccesos;
-    private $fechaHoraUltimaConexion;
-    private $fechaHoraUltimaConexionAnterior;
-    private $perfil;
-    public function __construct($codUsuario,$password,$descUsuario,$numAccesos,$fechaHoraUltimaConexion,$fechaHoraUltimaConexionAnterior,$perfil){
-        $this->$codUsuario=$codUsuario;
-        $this->$password=$password;
-        $this->$descUsuario=$descUsuario;
-        $this->$numAccesos=$numAccesos;
-        $this->$fechaHoraUltimaConexion=$fechaHoraUltimaConexion;
-        $this->$fechaHoraUltimaConexionAnterior=$fechaHoraUltimaConexionAnterior;
-        $this->$perfil=$perfil;
+    private string $codUsuario;
+    private string $password;
+    private string $descUsuario;
+    private int $numAccesos;
+    private DateTime $fechaHoraUltimaConexion;
+    private DateTime $fechaHoraUltimaConexionAnterior;
+    private string $perfil;
+    public function __construct(string $codUsuario,string $password,string $descUsuario, int $numAccesos,int $fechaHoraUltimaConexion,int $fechaHoraUltimaConexionAnterior,string $perfil){
+        $fecha = new DateTime();
+        $this->codUsuario=$codUsuario;
+        $this->password=$password;
+        $this->descUsuario=$descUsuario;
+        $this->numAccesos=$numAccesos+1;
+
+        $fecha->setTimestamp($fechaHoraUltimaConexion);
+        $this->fechaHoraUltimaConexion = $fecha;
+
+        $fecha->setTimestamp($fechaHoraUltimaConexionAnterior);
+        $this->fechaHoraUltimaConexionAnterior=$fecha;
+        $this->perfil=$perfil;
     }
     /*codUsuario*/
     public function getCodUsuario(){
@@ -45,5 +49,4 @@ class Usuario{
     public function getPerfil(){
         return $this->perfil;
     }
-
 }

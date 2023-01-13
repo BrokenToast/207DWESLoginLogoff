@@ -9,10 +9,7 @@ class processDB{
     public readonly string $user;
     public readonly string $password;
     private PDO $oConexionDB;
-    /**
-     * 
-     * @param PDO $conexionDB Conexion a la base de datos
-     */
+
     public function __construct($dsn,$user,$password){
         $this->dsn=$dsn;
         $this->user=$user;
@@ -64,14 +61,6 @@ class processDB{
             unset($this->oConexionDB);
         }
     }
-    /**
-     * Inacabado
-     * @param mixed $tabla
-     * @param mixed $aDatos
-     * @param mixed $condición
-     * @throws DBexception
-     * @return void
-     */
     public  function executeUpdate(string $tabla, array $aDatos, string $condición){
         $this->__wakeup();
         try {
