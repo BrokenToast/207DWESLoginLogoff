@@ -1,39 +1,6 @@
 <?php
-$aSelectorIdioma = [
-    ['es', 'Español'],
-    ['ct', 'Catalan'],
-    ['pt', 'Portugues'],
-    ['gl', 'Gallego']
-];
-if(isset($_COOKIE['idioma'])){
-    switch ($_COOKIE['idioma']) {
-        case 'ct':
-            $aSelectorIdioma = [
-                ['ct', 'Catalan'],
-                ['es', 'Español'],
-                ['pt', 'Portugues'],
-                ['gl', 'Gallego']
-            ];
-            break;
-        case 'pt':
-            $aSelectorIdioma = [
-                ['pt', 'Portugues'],
-                ['es', 'Español'],
-                ['ct', 'Catalan'],
-                ['gl', 'Gallego']
-            ];
-            break;
-        case 'gl':
-            $aSelectorIdioma = [
-                ['gl', 'Gallego'],
-                ['es', 'Español'],
-                ['ct', 'Catalan'],
-                ['pt', 'Portugues']
-            ];
-            break;
-    }
-}
-if (isset($_REQUEST['enviar'])) {
+
+if (isset($_REQUEST['iniciar'])) {
     $ok = true;
     $aErrores['usuario'] = validacionFormularios::comprobarAlfabetico($_REQUEST['usuario'], 30, 2, 1);
     $aErrores['password'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['password'], 16, 3, 1);
@@ -62,7 +29,15 @@ if (isset($_REQUEST['enviar'])) {
     }
 } 
 if(isset($_REQUEST['registrarse'])){
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     $_SESSION['paginaEnCurso'] = 'registrarse';
+    header('./index.html');
+}
+if(isset($_REQUEST['volver'])){
+    $paginaAnterior=$_SESSION['paginaAnterior'];
+    $paginaEnCuerso = $_SESSION['paginaEnCurso'];
+    $_SESSION['paginaAnterior'] = $paginaEnCuerso;
+    $_SESSION['paginaEnCurso'] = $paginaAnterior;
     header('./index.html');
 }
 require_once $aVista['layout'];

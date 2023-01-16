@@ -31,11 +31,13 @@ if($ok){
         $okPassword = true;
     }
     if(isset($_REQUEST['changePassword']) && $okPassword){
+        $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
         $_SESSION['paginaEnCurso'] = 'changepassword';
         header("Location: ./index.php");
     }
     if(isset($_REQUEST['borrar']) && $okPassword){
         if(UsuarioPDO::borrarUsuario($_SESSION['usuarioMiAplicacion']->codUsuario)==1){
+            $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
             $_SESSION['paginaEnCurso'] = 'iniciopublico';
             header("Location: ./index.php");
         }
@@ -43,7 +45,10 @@ if($ok){
 }
 
 if(isset($_REQUEST['volver'])){
-    $_SESSION['paginaEnCurso'] = 'inicioprivado';
+    $paginaAnterior=$_SESSION['paginaAnterior'];
+    $paginaEnCuerso = $_SESSION['paginaEnCurso'];
+    $_SESSION['paginaAnterior'] = $paginaEnCuerso;
+    $_SESSION['paginaEnCurso'] = $paginaAnterior;
     header('./index.html');
 }
 require_once $aVista['layout'];

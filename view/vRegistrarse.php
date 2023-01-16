@@ -1,7 +1,7 @@
 <section>
-    <a href="./login.php">Volver</a>
     <article>
     <form action="./index.php" method="post">
+        <input type="submit" name="volver" value="volver">
             <table id="tableForm">
                 <tr>
                     <td><label>Usuario*</label></td>

@@ -1,6 +1,6 @@
 <section>
     <article>
-        <form action="./cambiarPassword.php" method="post">
+        <form action="./index.php" method="post">
             <table>
                 <tr>
                     <td>Nueva contraseña:</td>

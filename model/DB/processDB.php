@@ -43,6 +43,13 @@ class processDB{
         }
         
     }
+    /**
+     * Summary of executeInsert
+     * @param string $tabla
+     * @param array $aDatos
+     * @throws DBexception
+     * @return bool|int
+     */
     public  function executeInsert(string $tabla,array $aDatos){
         $this->__wakeup();
         try {
@@ -62,18 +69,26 @@ class processDB{
             unset($this->oConexionDB);
         }
     }
-    public  function executeUpdate(string $tabla, array $aDatos, string $condición){
+    /**
+     * Summary of executeUpdate
+     * @param string $tabla
+     * @param array $aDatos
+     * @param string $condición
+     * @throws DBexception
+     * @return bool|int
+     */
+    public  function executeUpdate(string $tabla, array $aDatos, string $condicion){
         $this->__wakeup();
         try {
             if(is_array($aDatos[array_keys($aDatos)[0]])){
                 foreach ($aDatos as $value) {
                     $data = $this->transforDataStringUpdate($value);
-                    $this->oConexionDB->exec("UPDATE $tabla SET $data WHERE $condición");
+                    $this->oConexionDB->exec("UPDATE $tabla SET $data WHERE $condicion");
                 }
                 return true;
             }else{
                 $data = $this->transforDataStringUpdate($aDatos);
-                return $this->oConexionDB->exec("UPDATE $tabla SET $data WHERE $condición");
+                return $this->oConexionDB->exec("UPDATE $tabla SET $data WHERE $condicion");
             }
         } catch (PDOException $th) {
             throw new DBexception($th->getMessage());
@@ -81,13 +96,21 @@ class processDB{
             unset($this->oConexionDB);
         }
     }
-    public  function executeDelete(string $tabla,string $condición="",bool $deleteAll=false){
+    /**
+     * Summary of executeDelete
+     * @param string $tabla
+     * @param string $condición
+     * @param bool $deleteAll
+     * @throws DBexception
+     * @return bool|int
+     */
+    public  function executeDelete(string $tabla,string $condicion="",bool $deleteAll=false){
         if(empty($condición) && !$deleteAll){
             throw new DBexception("No has puesto condición");
         }else{
             $this->__wakeup();
             try {
-                return $this->oConexionDB->exec("DELETE FROM $tabla where $condición");
+                return $this->oConexionDB->exec("DELETE FROM $tabla where $condicion");
             } catch (PDOException $th) {
                 throw new DBexception($th->getMessage());
             }finally{
@@ -119,7 +142,7 @@ class processDB{
     }
     private function selectSingelType(mixed $data, bool $isUpdate=false){
         if(is_string($data)){
-            if($isUpdate && preg_match("/[\+\-%\*\/]/i",$data)){
+            if($isUpdate && preg_match("/[\+\-%\*=\/]/i",$data)){
                 return $data;
             }
             return "'$data'";

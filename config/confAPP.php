@@ -1,12 +1,13 @@
 <?php 
     /*Librerias*/
     require_once('./core/221024ValidacionFormularios.php');
-    require_once('./core/DB/processDB.php');
+    
     /*Config*/
     require_once('./config/confDBPDO.php');
     /*Modelo*/
     require_once('./model/usuario.php');
     require_once('./model/UsuarioPDO.php');
+    require_once('./model/DB/processDB.php');
     /*Controlador*/
     $aControlador = [
         "iniciopublico" => "./controller/cInicioPublico.php",

@@ -1,4 +1,5 @@
 <form action="./index.php" method="post">
+    <input type="submit" name="volver" value="volver">
     <table id="tableForm">
         <tr>
             <td><label>Usuario</label></td>
@@ -9,21 +10,7 @@
             <td><input type="password" name="password"></td>
         </tr>
         <tr>
-            <td><label>Idioma</label></td>
-            <td>
-                <select name="idioma" id="idioma">
-                    <?php
-                    foreach($aSelectorIdioma as $idioma){
-                        ?> 
-                        <option value="<?php echo $idioma[0];?>"><?php echo $idioma[1];?></option>
-                        <?php
-                    }
-                    ?>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="enviar" value="Iniciar"></td>
+            <td><input type="submit" name="iniciar" value="Iniciar"></td>
             <td><input type="submit" name="registrarse" value="registrarse"></td>
         </tr>
     </table>
