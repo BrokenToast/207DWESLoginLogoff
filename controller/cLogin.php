@@ -43,22 +43,26 @@ if (isset($_REQUEST['enviar'])) {
         }
     }
     if ($ok) {
-        $oRespuesta = UsuarioPDO::validadUsuario($_REQUEST['usuario'], $_REQUEST['password']);
-        if (!is_null($oRespuesta)) {
-            $_SESSION['usuarioMiAplicacion'] = $oRespuesta;
-            $_SESSION['codUsuarioEnCurso'] = $oRespuesta->getCodUsuario();
+        $oUsuario = UsuarioPDO::validadUsuario($_REQUEST['usuario'], $_REQUEST['password']);
+        if (!is_null($oUsuario)) {
+            $_SESSION['usuarioMiAplicacion'] = $oUsuario;
+            $_SESSION['codUsuarioEnCurso'] = $oUsuario->codUsuario;
             //Idioma
             if (isset($_COOKIE['idioma']) && $_REQUEST['idioma'] == $_COOKIE['idioma']) {
-                $_SESSION['idioma'] = $_COOKIE['idioma'];
+                setcookie('idioma', $_REQUEST['idioma']);
             } else {
                 setcookie('idioma', $_REQUEST['idioma']);
                 $_SESSION['idioma'] = $_REQUEST['idioma'];
             }
-            //
-            $_SESSION['paginaEnCurso'] = 'programa';
+            $oUsuario->numAccesos += 1;
+            UsuarioPDO::modificarUsuario($oUsuario);
+            $_SESSION['paginaEnCurso'] = 'inicioprivado';
             header("Location: ./index.php");
         }
     }
 } 
-
+if(isset($_REQUEST['registrarse'])){
+    $_SESSION['paginaEnCurso'] = 'registrarse';
+    header('./index.html');
+}
 require_once $aVista['layout'];

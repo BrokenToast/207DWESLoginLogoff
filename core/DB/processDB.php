@@ -51,9 +51,10 @@ class processDB{
                     $data = $this->transforDataStringInsert($value);
                     $this->oConexionDB->exec("insert into $tabla values($data)");
                 }
+                return true;
             }else{
                 $data = $this->transforDataStringInsert($aDatos);
-                $this->oConexionDB->exec("insert into $tabla values($data)");
+                return $this->oConexionDB->exec("insert into $tabla values($data)");
             }
         } catch (PDOException $th) {
             throw new DBexception($th->getMessage());
@@ -69,9 +70,10 @@ class processDB{
                     $data = $this->transforDataStringUpdate($value);
                     $this->oConexionDB->exec("UPDATE $tabla SET $data WHERE $condición");
                 }
+                return true;
             }else{
                 $data = $this->transforDataStringUpdate($aDatos);
-                $this->oConexionDB->exec("UPDATE $tabla SET $data WHERE $condición");
+                return $this->oConexionDB->exec("UPDATE $tabla SET $data WHERE $condición");
             }
         } catch (PDOException $th) {
             throw new DBexception($th->getMessage());

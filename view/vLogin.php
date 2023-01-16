@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <td><input type="submit" name="enviar" value="Iniciar"></td>
-            <td><a href="./registro.php">Registrarse</a></td>
+            <td><input type="submit" name="registrarse" value="registrarse"></td>
         </tr>
     </table>
 </form>
