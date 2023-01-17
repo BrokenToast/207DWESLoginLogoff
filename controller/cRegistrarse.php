@@ -35,7 +35,7 @@ if(isset($_COOKIE['idioma'])){
     }
 }
 $aErrores = [
-    'usuario'=>'hola que rta',
+    'usuario'=>'',
     'password'=>'',
 ];
 if(isset($_REQUEST['registrar'])){

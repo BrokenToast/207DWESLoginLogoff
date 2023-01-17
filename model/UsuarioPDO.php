@@ -21,7 +21,7 @@ class UsuarioPDO{
             $usuario->perfil,
             0
         ]];
-        return $conexion->executeQuery("INSERT INTO T01_Usuario values(?,?,?,?,?,?)",$aDatosInsert);
+        return $conexion->executeUDI("INSERT INTO T01_Usuario values(?,?,?,?,?,?,?)",$aDatosInsert);
     }
     public static function modificarUsuario(Usuario $usuario,string $codUsuario=null){
         $conexion = new processDB(DSNMYSQL, USER, PASSWORD);
@@ -36,7 +36,7 @@ class UsuarioPDO{
         if(is_null($codUsuario)){
             $codUsuario=$usuario->codUsuario;
         }
-        return $conexion->executeUDI("update T01_Usuario set $aDatosUpdate[0],$aDatosUpdate[1],$aDatosUpdate[2],$aDatosUpdate[3],$aDatosUpdate[4],$aDatosUpdate[5]   where T01_CodUsuario='$codUsuario'",$aDatosUpdate);
+        return $conexion->executeUDI("update T01_Usuario set $aDatosUpdate[0],$aDatosUpdate[1],$aDatosUpdate[2],$aDatosUpdate[3],$aDatosUpdate[4],$aDatosUpdate[5]   where T01_CodUsuario='$codUsuario'");
     }
     public static function borrarUsuario(string $codUsuario){
         $conexion = new processDB(DSNMYSQL, USER, PASSWORD);
