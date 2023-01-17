@@ -16,7 +16,8 @@
         "detalles"=>"./controller/cDetalles.php",
         "registrarse"=>"./controller/cRegistrarse.php",
         "micuenta"=>"./controller/cMiCuenta.php",
-        "changepassword"=>"./controller/cChangePassword.php"
+        "changepassword"=>"./controller/cChangePassword.php",
+        "wip"=>"./controller/cWIP.php"
     ];
     /*Vista*/
     $aVista = [
@@ -27,6 +28,7 @@
         "detalles"=>"./view/vDetalles.php",
         "registrarse"=>"./view/vRegistrarse.php",
         "micuenta"=>"./view/vMiCuenta.php",
-        "changepassword"=>"./view/vChangePassword.php"
+        "changepassword"=>"./view/vChangePassword.php",
+        "wip"=>"./view/vWIP.php"
     ];
 ?>

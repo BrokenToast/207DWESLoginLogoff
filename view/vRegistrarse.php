@@ -35,20 +35,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label>Idioma</label></td>
-                    <td>
-                        <select name="idioma" id="idioma">
-                            <?php
-                            foreach($aSelectorIdioma as $idioma){
-                                ?> 
-                                <option value="<?php echo $idioma[0];?>"><?php echo $idioma[1];?></option>
-                                <?php
-                            }
-                            ?>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
                     <td><input type="submit" name="registrar" value="registrar"></td>
                 </tr>
             </table>

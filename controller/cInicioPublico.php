@@ -33,12 +33,9 @@ if(isset($_COOKIE['idioma'])){
             break;
     }
 }
-// if (isset($_COOKIE['idioma']) && $_REQUEST['idioma'] == $_COOKIE['idioma']) {
-//     setcookie('idioma', $_REQUEST['idioma']);
-// } else {
-//     setcookie('idioma', $_REQUEST['idioma']);
-//     $_SESSION['idioma'] = $_REQUEST['idioma'];
-// }
+if(isset($_REQUEST['guardaridioma'])){
+    setcookie('idioma', $_REQUEST['idioma']);
+}
 
 if(isset($_REQUEST['login'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];

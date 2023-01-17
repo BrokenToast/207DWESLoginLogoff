@@ -12,7 +12,7 @@ class UsuarioPDO{
     }
     public static function altaUsuario(Usuario $usuario){
         $conexion = new processDB(DSNMYSQL, USER, PASSWORD);
-        $aDatosInsert = [
+        $aDatosInsert = [[
             $usuario->codUsuario,
             $usuario->password,
             $usuario->descUsuario,
@@ -20,29 +20,27 @@ class UsuarioPDO{
             $usuario->numAccesos,
             $usuario->perfil,
             0
-        ];
-        return $conexion->executeInsert("T01_Usuario", $aDatosInsert);
+        ]];
+        return $conexion->executeQuery("INSERT INTO T01_Usuario values(?,?,?,?,?,?)",$aDatosInsert);
     }
     public static function modificarUsuario(Usuario $usuario,string $codUsuario=null){
         $conexion = new processDB(DSNMYSQL, USER, PASSWORD);
-        $datos=[
-            "T01_CodUsuario"=>$usuario->codUsuario,
-            "T01_Password"=>$usuario->password,
-            "T01_DescUsuario"=>$usuario->descUsuario,
-            "T01_FechaHoraUltimaConexion"=>$usuario->fechaHoraUltimaConexion->getTimestamp(),
-            "T01_NumConexiones"=>$usuario->numAccesos,
-            "T01_Perfil"=>$usuario->perfil,
+        $aDatosUpdate=[
+            "T01_CodUsuario='".$usuario->codUsuario."'",
+            "T01_Password='".$usuario->password."'",
+            "T01_DescUsuario='".$usuario->descUsuario."'",
+            "T01_FechaHoraUltimaConexion='".$usuario->fechaHoraUltimaConexion->getTimestamp()."'",
+            "T01_NumConexiones='".$usuario->numAccesos."'",
+            "T01_Perfil='".$usuario->perfil."'",
         ];
         if(is_null($codUsuario)){
-            $condicion="T01_CodUsuario='$usuario->codUsuario'";
-        }else{
-            $condicion="T01_CodUsuario='$codUsuario'";
+            $codUsuario=$usuario->codUsuario;
         }
-        return $conexion->executeUpdate("T01_Usuario",$datos,$condicion);
+        return $conexion->executeUDI("update T01_Usuario set $aDatosUpdate[0],$aDatosUpdate[1],$aDatosUpdate[2],$aDatosUpdate[3],$aDatosUpdate[4],$aDatosUpdate[5]   where T01_CodUsuario='$codUsuario'",$aDatosUpdate);
     }
     public static function borrarUsuario(string $codUsuario){
         $conexion = new processDB(DSNMYSQL, USER, PASSWORD);
-        return $conexion->executeDelete("T01_Usuario", "T01_CodUsuario='$codUsuario'");
+        return $conexion->executeUDI("delete from T01_Usuario where T01_CodUsuario='$codUsuario'");
     }
     public static function validarCodNoExiste(string $codUsuario){
         $conexion = new processDB(DSNMYSQL, USER, PASSWORD);

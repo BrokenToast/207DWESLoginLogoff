@@ -1,21 +1,24 @@
 <section>
-    <!-- <?php 
-        // switch ($_COOKIE['idioma']) {
-        //     case 'es':
-                 ?> <h3>Bienvenido <?php print $_SESSION['usuarioMiAplicacion']->codUsuario?></h3> <?php
-        //         break;
-        //     case 'pt':
-        //         ?> <h3>Bem-vindo <?php print $_SESSION['usuarioMiAplicacion']->codUsuario?></h3> <?php
-        //         break;
-        //     case 'ct':
-        //         ?> <h3>Benvingut <?php print $_SESSION['usuarioMiAplicacion']->codUsuario?></h3> <?php
-        //         break;
-        //     case 'gl':
-        //         ?> <h3>Benvido <?php print $_SESSION['usuarioMiAplicacion']->codUsuario?></h3> <?php
-        //         break;
-        // }
-    ?> -->
-    <h3>Bienvenido <?php print $_SESSION['usuarioMiAplicacion']->codUsuario?></h3>
+    <?php 
+        if(isset($_COOKIE['idioma'])){
+            switch ($_COOKIE['idioma']) {
+                case 'es':
+                    ?> <h3>Bienvenido <?php print $_SESSION['usuarioMiAplicacion']->codUsuario?></h3> <?php
+                    break;
+                case 'pt':
+                    ?> <h3>Bem-vindo <?php print $_SESSION['usuarioMiAplicacion']->codUsuario?></h3> <?php
+                    break;
+                case 'ct':
+                    ?> <h3>Benvingut <?php print $_SESSION['usuarioMiAplicacion']->codUsuario?></h3> <?php
+                    break;
+                case 'gl':
+                    ?> <h3>Benvido <?php print $_SESSION['usuarioMiAplicacion']->codUsuario?></h3> <?php
+                    break;
+            }
+        }else{
+            ?> <h3>Bienvenido <?php print $_SESSION['usuarioMiAplicacion']->codUsuario?></h3> <?php
+        }
+    ?>
         <form method="./programa.php" method="post">
             <input type="submit" name="detalles" value="Detalles">
             <input type="submit" name="mantenimiento" value="Mantenimiento Departamento">

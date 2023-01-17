@@ -12,9 +12,6 @@ if(isset($_REQUEST['changeUser'])){
     $ok = true;
     $aErrores['userName']=validacionFormularios::comprobarAlfabetico($_REQUEST['userName'], 30, 2, 1);
     $aErrores['descUsuario'] = validacionFormularios::comprobarAlfaNumerico($_REQUEST['descUsuario'], 250, 2, 1);
-    if(UsuarioPDO::validarCodNoExiste("$_REQUEST[userName]")){
-        $aErrores['userExist'] = "El nombre del usuario ya existe";
-    }
     foreach($aErrores as $error){
         if(!empty($error)){
             $ok = false;
@@ -22,8 +19,12 @@ if(isset($_REQUEST['changeUser'])){
     }
 }
 if($ok){
-    $_SESSION['usuarioMiAplicacion']->codUsuario = $_REQUEST['userName'];
     $_SESSION['usuarioMiAplicacion']->descUsuario=$_REQUEST['descUsuario'];
+    if(!UsuarioPDO::validarCodNoExiste("$_REQUEST[userName]")){
+        $_SESSION['usuarioMiAplicacion']->codUsuario = $_REQUEST['userName'];
+    }else{
+        $aErrores["codUser"] = "El nombre de usuario no esta disponible";
+    }
     UsuarioPDO::modificarUsuario($_SESSION['usuarioMiAplicacion'], $codUsuarioAnterior);
 }else{
     $okPassword = false;
@@ -49,6 +50,6 @@ if(isset($_REQUEST['volver'])){
     $paginaEnCuerso = $_SESSION['paginaEnCurso'];
     $_SESSION['paginaAnterior'] = $paginaEnCuerso;
     $_SESSION['paginaEnCurso'] = $paginaAnterior;
-    header('./index.html');
+    header('Location: ./index.php');
 }
 require_once $aVista['layout'];

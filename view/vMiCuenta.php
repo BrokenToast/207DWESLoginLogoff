@@ -36,9 +36,9 @@
                 <tr>  
                     <td style="color:green;"><?php echo ($ok??false) ? "Se a modificado con exito" : ""; ?></td>     
                     <?php
-                    foreach($aErrores ?? [] as $nombreCampo=>$error){
+                    foreach($aErrores ?? [] as $error){
                         if(!empty($error)){
-                            ?> <li style="color:red;"> <?php echo $nombreCampo.":".$error?></li> <?php
+                            ?> <li style="color:red;"> <?php echo $error?></li> <?php
                         }
                     }
                     ?>

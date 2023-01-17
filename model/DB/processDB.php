@@ -16,10 +16,10 @@ class processDB{
         $this->password = $password;
     }
     /**
-     * Metodo que no permite lanzar un quiery y nos devuelve la información en una array
+     * Metodo que no permite lanzar un quiery y nos devuelve la informacion en una array
      * @param string $query Query que se va a ejecutar.
      * @throws DBexception Se lanza cuando hay un error con el query
-     * @return array devuelve una array con la información del Quer(Formato: [[tupla1],[tupla..],[tupla..]]) o [tupla] y si no hay resultado devuelve false. 
+     * @return array devuelve una array con la informacion del Quer(Formato: [[tupla1],[tupla..],[tupla..]]) o [tupla] y si no hay resultado devuelve false. 
      */
     public function executeQuery(string $query){
         $this->__wakeup();
@@ -44,110 +44,66 @@ class processDB{
         
     }
     /**
-     * Summary of executeInsert
-     * @param string $tabla
-     * @param array $aDatos
-     * @throws DBexception
-     * @return bool|int
+     * executeUDI: Sirve para ejecutar un inserción o update o delete:
+     * En la inserción podemos hacer un query paremetizado esto nos abre la posibilidad para pasarle una array que contenga datos sobre la inserción
+     * pero debe respetar uno de los siguientes formatos la array de datos:
+     * Requisitos: la array de datos contiene otras arraya que almacenan las tuplas.
+     * 1º forma
+     * Insert:
+     * insert into prueba1 VALUES(:codigo,:nombre,:apellidos,:edad)
+     * 
+     * Datos:
+     * [[
+     * ":codigo"=>"kjfh",
+     * ":nombre"=>"ernesto",
+     * ":apellidos"=>"algo",
+     * ":edad"=>"54455"
+     * ],
+     * [
+     * ":codigo"=>"hjj",
+     * ":nombre"=>"erpepe",
+     * ":apellidos"=>"nose",
+     * ":edad"=>"22"
+     * ]
+     * ];
+     * 
+     * 2º Forma
+     * Insert:
+     * insert into prueba1 VALUES(?,?,?,?)
+     * 
+     * Datos:
+     * [
+     *     [
+     *         "cdfg",
+     *         "Alex",
+     *         "Prieto",
+     *         20
+     *     ],
+     *     [
+     *         "kkk",
+     *         "Raul",
+     *         "nose",
+     *         21
+     *     ]
+     * ];
+     * @param string $UDI Inserto update o delete 
+     * @param array|null $datos Datos del insert.
+     * @return bool|int Devuelve el numero de tuplas afectadas.
      */
-    public  function executeInsert(string $tabla,array $aDatos){
+    public function executeUDI(string $UDI,array $datos=null){
         $this->__wakeup();
-        try {
-            if(is_array($aDatos[0])){
-                foreach ($aDatos as $value) {
-                    $data = $this->transforDataStringInsert($value);
-                    $this->oConexionDB->exec("insert into $tabla values($data)");
-                }
-                return true;
-            }else{
-                $data = $this->transforDataStringInsert($aDatos);
-                return $this->oConexionDB->exec("insert into $tabla values($data)");
-            }
-        } catch (PDOException $th) {
-            throw new DBexception($th->getMessage());
-        }finally{
-            unset($this->oConexionDB);
-        }
-    }
-    /**
-     * Summary of executeUpdate
-     * @param string $tabla
-     * @param array $aDatos
-     * @param string $condición
-     * @throws DBexception
-     * @return bool|int
-     */
-    public  function executeUpdate(string $tabla, array $aDatos, string $condicion){
-        $this->__wakeup();
-        try {
-            if(is_array($aDatos[array_keys($aDatos)[0]])){
-                foreach ($aDatos as $value) {
-                    $data = $this->transforDataStringUpdate($value);
-                    $this->oConexionDB->exec("UPDATE $tabla SET $data WHERE $condicion");
-                }
-                return true;
-            }else{
-                $data = $this->transforDataStringUpdate($aDatos);
-                return $this->oConexionDB->exec("UPDATE $tabla SET $data WHERE $condicion");
-            }
-        } catch (PDOException $th) {
-            throw new DBexception($th->getMessage());
-        }finally{
-            unset($this->oConexionDB);
-        }
-    }
-    /**
-     * Summary of executeDelete
-     * @param string $tabla
-     * @param string $condición
-     * @param bool $deleteAll
-     * @throws DBexception
-     * @return bool|int
-     */
-    public  function executeDelete(string $tabla,string $condicion="",bool $deleteAll=false){
-        if(empty($condición) && !$deleteAll){
-            throw new DBexception("No has puesto condición");
+        if(is_null($datos)){
+            return $oResultado=$this->oConexionDB->exec($UDI);
         }else{
-            $this->__wakeup();
-            try {
-                return $this->oConexionDB->exec("DELETE FROM $tabla where $condicion");
-            } catch (PDOException $th) {
-                throw new DBexception($th->getMessage());
-            }finally{
-                unset($this->oConexionDB);
+            if(is_array($datos[0])){
+                $prepareUDI=$this->oConexionDB->prepare($UDI);
+                foreach($datos as $tupla){
+                    $prepareUDI->execute($tupla);
+                }
             }
         }
     }
     public function __wakeup(){
         $this->oConexionDB = new PDO($this->dsn,$this->user,$this->password);
-    }
-    private function transforDataStringInsert(array $aData){
-        $dataFormat="";
-        $numDatas=count($aData);
-        for ($i=0; $i<$numDatas ; $i++) { 
-            $dataFormat=sprintf("%s%s",$dataFormat,(($i==$numDatas-1)? $this->selectSingelType($aData[$i]) : $this->selectSingelType($aData[$i]).","));
-        }
-        return $dataFormat;
-    }
-    private function transforDataStringUpdate(array $aData){
-        $data="";
-        $numDatas=count($aData);
-        $dataFormat = "";
-        $aColumName = array_keys($aData);
-        for ($i=0; $i<$numDatas ; $i++) {
-            $columna=sprintf("%s=%s",$aColumName[$i],($this->selectSingelType($aData[$aColumName[$i]],true)));
-            $dataFormat=sprintf("%s%s",$dataFormat,(($i==$numDatas-1)? $columna : $columna.","));
-        }
-        return $dataFormat;
-    }
-    private function selectSingelType(mixed $data, bool $isUpdate=false){
-        if(is_string($data)){
-            if($isUpdate && preg_match("/[\+\-%\*=\/]/i",$data)){
-                return $data;
-            }
-            return "'$data'";
-        }else{
-            return "$data";
-        }
     }
 }

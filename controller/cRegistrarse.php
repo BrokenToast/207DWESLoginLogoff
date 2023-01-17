@@ -49,17 +49,10 @@ if(isset($_REQUEST['registrar'])){
     }
 }
 if ($ok ) {
-    if (UsuarioPDO::validarCodNoExiste($_REQUEST['usuario'])){
+    if(!UsuarioPDO::validarCodNoExiste($_REQUEST['usuario'])){
         $oUsuario = new Usuario($_REQUEST['usuario'], hash("sha256",$_REQUEST['password']), $_REQUEST['descUsuario'], 1, time(), time(), "usuario");
         $_SESSION['usuarioMiAplicacion'] = $oUsuario;
         UsuarioPDO::altaUsuario($oUsuario);
-        if(isset($_COOKIE['idioma']) && $_REQUEST['idioma']==$_COOKIE['idioma']){
-            setcookie('idioma',$_REQUEST['idioma']);
-        }else{
-            setcookie('idioma',$_REQUEST['idioma']);
-            $_SESSION['idioma']=$_REQUEST['idioma'];
-        }
-        
         $_SESSION['paginaEnCurso'] = 'inicioprivado';
         header("Location: ./index.php");
     }else{
@@ -71,6 +64,6 @@ if(isset($_REQUEST['volver'])){
     $paginaEnCuerso = $_SESSION['paginaEnCurso'];
     $_SESSION['paginaAnterior'] = $paginaEnCuerso;
     $_SESSION['paginaEnCurso'] = $paginaAnterior;
-    header('./index.html');
+    header('Location: ./index.php');
 }
 require_once $aVista['layout'];

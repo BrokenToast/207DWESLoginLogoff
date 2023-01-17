@@ -14,13 +14,6 @@ if (isset($_REQUEST['iniciar'])) {
         if (!is_null($oUsuario)) {
             $_SESSION['usuarioMiAplicacion'] = $oUsuario;
             $_SESSION['codUsuarioEnCurso'] = $oUsuario->codUsuario;
-            //Idioma
-            if (isset($_COOKIE['idioma']) && $_REQUEST['idioma'] == $_COOKIE['idioma']) {
-                setcookie('idioma', $_REQUEST['idioma']);
-            } else {
-                setcookie('idioma', $_REQUEST['idioma']);
-                $_SESSION['idioma'] = $_REQUEST['idioma'];
-            }
             $oUsuario->numAccesos += 1;
             UsuarioPDO::modificarUsuario($oUsuario);
             $_SESSION['paginaEnCurso'] = 'inicioprivado';
@@ -31,13 +24,13 @@ if (isset($_REQUEST['iniciar'])) {
 if(isset($_REQUEST['registrarse'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     $_SESSION['paginaEnCurso'] = 'registrarse';
-    header('./index.html');
+    header('Location: ./index.php');
 }
 if(isset($_REQUEST['volver'])){
     $paginaAnterior=$_SESSION['paginaAnterior'];
     $paginaEnCuerso = $_SESSION['paginaEnCurso'];
     $_SESSION['paginaAnterior'] = $paginaEnCuerso;
     $_SESSION['paginaEnCurso'] = $paginaAnterior;
-    header('./index.html');
+    header('Location: ./index.php');
 }
 require_once $aVista['layout'];
