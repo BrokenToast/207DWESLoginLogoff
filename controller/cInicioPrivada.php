@@ -41,7 +41,11 @@ if(isset($_COOKIE['idioma'])){
 if($_SESSION['usuariologinlogoff207']->numAccesos==1){
     $aRespuestaInicioPrivado['mensajeNumConexiones']='Es tu primera conexion';
 }else{
-    $aRespuestaInicioPrivado['mensajeNumConexiones']=sprintf('Se a conectado %d \n La ultima conexion fue en %s',$_SESSION['usuariologinlogoff207']->numAccesos,$_SESSION['usuariologinlogoff207']->fechaHoraUltimaConexionAnterior->format('d-m-Y H:i:s'));
+    $aRespuestaInicioPrivado['mensajeNumConexiones']=sprintf('Se a conectado %d <br> La ultima conexion fue en %s',$_SESSION['usuariologinlogoff207']->numAccesos,$_SESSION['usuariologinlogoff207']->fechaHoraUltimaConexionAnterior->format('d-m-Y H:i:s'));
 
+}
+if(isset($_REQUEST['error'])){
+    $conexion = new DBPDO(DSNMYSQL, USER, PASSWORD);
+    $conexion->executeUDI("INSERT INTO T01_Usuario values(?,?,?,?,?,?,?)");
 }
 require_once $aVista['layout'];

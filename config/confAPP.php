@@ -8,6 +8,7 @@
     require_once('./model/usuario.php');
     require_once('./model/UsuarioPDO.php');
     require_once('./model/DBPDO.php');
+    require_once './model/ErrorLoginLogoff.php';
     /*Controlador*/
     $aControlador = [
         "iniciopublico" => "./controller/cInicioPublico.php",

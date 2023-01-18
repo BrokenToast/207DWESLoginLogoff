@@ -4,6 +4,7 @@
             <input type="submit" name="detalles" value="Detalles">
             <input type="submit" name="mantenimiento" value="Mantenimiento Departamento">
             <input type="submit" name="editar" value="Editar Perfil">
+            <input type="submit" name="error" value="Error">
             <input type="submit" name="salir" value="Salir">
         </form>
         <div>
