@@ -8,6 +8,9 @@ if(isset($_REQUEST['cambiar'])){
     if($_REQUEST['newPassword']!=$_REQUEST['repitPassword']){
         $aErrores['iguales'] = "No son iguales";
     }
+    if(hash("sha256",$_REQUEST['newPassword']) == $_SESSION['usuariologinlogoff207']->password){
+        $aErrores['lastPassword'] = "Es igual a la contraseña anterior";
+    }
     foreach($aErrores as $value){
         if(!empty($value)){
         $ok = false;        
@@ -15,9 +18,16 @@ if(isset($_REQUEST['cambiar'])){
     }
 }
 if($ok){
-    $_SESSION['usuarioMiAplicacion']->password=hash("sha256",$_REQUEST['newPassword']);
-    UsuarioPDO::modificarUsuario($_SESSION['usuarioMiAplicacion'],$_SESSION['usuarioMiAplicacion']->codUsuario);
+    $_SESSION['usuariologinlogoff207']->password=hash("sha256",$_REQUEST['newPassword']);
+    UsuarioPDO::modificarUsuario($_SESSION['usuariologinlogoff207'],$_SESSION['usuariologinlogoff207']->codUsuario);
     $_SESSION['paginaEnCurso']="micuenta";
     header("Location: ./index.php");
+}
+if(isset($_REQUEST['volver'])){
+    $paginaAnterior=$_SESSION['paginaAnterior'];
+    $paginaEnCuerso = $_SESSION['paginaEnCurso'];
+    $_SESSION['paginaAnterior'] = $paginaEnCuerso;
+    $_SESSION['paginaEnCurso'] = $paginaAnterior;
+    header('Location: ./index.php');
 }
 require_once $aVista['layout'];

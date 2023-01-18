@@ -6,31 +6,31 @@
                 <tr>
                     <td>Usuario:</td>
                     <td>
-                        <input type="text" name="userName" id="userName" value="<?php echo $_SESSION['usuarioMiAplicacion']->codUsuario;?>">
+                        <input type="text" name="userName" id="userName" value="<?php echo $aRespuestaMiCuenta['codUsuario'];?>">
                     </td>
                 </tr>
                 <tr>
                     <td>Descripción del usuario:</td>
                     <td>
-                        <textarea name="descUsuario" id="descUsuario" cols="20" rows="4"><?php echo $_SESSION['usuarioMiAplicacion']->descUsuario;?></textarea>
+                        <textarea name="descUsuario" id="descUsuario" cols="20" rows="4"><?php echo $aRespuestaMiCuenta['descUsuario'];?></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td>Fecha ultima conexión:</td>
                     <td>
-                        <input disabled type="text" name="fechaUltima" id="fechaUltima" value="<?php echo $_SESSION['usuarioMiAplicacion']->fechaHoraUltimaConexion->format('d-m-Y H:i:s');?>">
+                        <input disabled type="text" name="fechaUltima" id="fechaUltima" value="<?php echo $aRespuestaMiCuenta['fechaHoraUltimaConexion'];?>">
                     </td>
                 </tr>
                 <tr>
                     <td>Numero de conexiones:</td>
                     <td>
-                        <input disabled type="number" name="numeroConexiones" id="numeroConexiones" value="<?php echo $_SESSION['usuarioMiAplicacion']->numAccesos;?>">
+                        <input disabled type="number" name="numeroConexiones" id="numeroConexiones" value="<?php echo $aRespuestaMiCuenta['numAccesos'];?>">
                     </td>
                 </tr>
                 <tr>
                     <td>Tipo de perfil:</td>
                     <td>
-                        <input disabled type="text" name="tipoPerfil" id="tipoPerfil" value="<?php echo $_SESSION['usuarioMiAplicacion']->perfil;?>">
+                        <input disabled type="text" name="tipoPerfil" id="tipoPerfil" value="<?php echo $aRespuestaMiCuenta['perfil'];?>">
                     </td>
                 </tr>
                 <tr>  

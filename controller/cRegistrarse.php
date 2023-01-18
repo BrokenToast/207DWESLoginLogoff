@@ -34,10 +34,6 @@ if(isset($_COOKIE['idioma'])){
             break;
     }
 }
-$aErrores = [
-    'usuario'=>'',
-    'password'=>'',
-];
 if(isset($_REQUEST['registrar'])){
     $ok = true;
     $aErrores['usuario']=validacionFormularios::comprobarAlfabetico($_REQUEST['usuario'],30,2,1);
@@ -51,7 +47,7 @@ if(isset($_REQUEST['registrar'])){
 if ($ok ) {
     if(!UsuarioPDO::validarCodNoExiste($_REQUEST['usuario'])){
         $oUsuario = new Usuario($_REQUEST['usuario'], hash("sha256",$_REQUEST['password']), $_REQUEST['descUsuario'], 1, time(), time(), "usuario");
-        $_SESSION['usuarioMiAplicacion'] = $oUsuario;
+        $_SESSION['usuariologinlogoff207'] = $oUsuario;
         UsuarioPDO::altaUsuario($oUsuario);
         $_SESSION['paginaEnCurso'] = 'inicioprivado';
         header("Location: ./index.php");

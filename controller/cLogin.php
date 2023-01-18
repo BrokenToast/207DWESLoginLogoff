@@ -12,7 +12,7 @@ if (isset($_REQUEST['iniciar'])) {
     if ($ok) {
         $oUsuario = UsuarioPDO::validadUsuario($_REQUEST['usuario'], $_REQUEST['password']);
         if (!is_null($oUsuario)) {
-            $_SESSION['usuarioMiAplicacion'] = $oUsuario;
+            $_SESSION['usuariologinlogoff207'] = $oUsuario;
             $_SESSION['codUsuarioEnCurso'] = $oUsuario->codUsuario;
             $oUsuario->numAccesos += 1;
             UsuarioPDO::modificarUsuario($oUsuario);

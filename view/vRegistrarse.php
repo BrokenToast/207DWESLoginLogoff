@@ -5,16 +5,16 @@
             <table id="tableForm">
                 <tr>
                     <td><label>Usuario*</label></td>
-                    <td><input type="text" name="usuario" value="<?php echo (!isset($aErrores['usuario'])) ? $_REQUEST['usuario']:"";?>"></td>
+                    <td><input type="text" name="usuario" value="<?php echo (isset($aErrores['usuario']) && empty($aErrores['usuario'])) ? $_REQUEST['usuario']:"";?>"></td>
                 </tr>
                 <tr>
                     <td><label>Password*</label></td>
-                    <td><input type="password" name="password" value="<?php echo (!isset($aErrores['password'])) ? $_REQUEST['password']:"";?>"></td>
+                    <td><input type="password" name="password" value="<?php echo (isset($aErrores['password']) && empty($aErrores['password'])) ? $_REQUEST['password']:"";?>"></td>
                 </tr>
                 <tr>
                     <td><label>Descripcion del Usuario</label></td>
                     <td>
-                        <textarea name="descUsuario" id="descUsuario" cols="20" rows="4"><?php echo (isset($_REQUEST['registrar'])) ? $_REQUEST['descUsuario']:"";?></textarea>
+                        <textarea name="descUsuario" id="descUsuario" cols="20" rows="4"><?php echo $_REQUEST['descUsuario']??"" ?></textarea>
                     </td>
                 </tr>
                 <tr>

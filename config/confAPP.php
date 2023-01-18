@@ -7,7 +7,7 @@
     /*Modelo*/
     require_once('./model/usuario.php');
     require_once('./model/UsuarioPDO.php');
-    require_once('./model/DB/processDB.php');
+    require_once('./model/DBPDO.php');
     /*Controlador*/
     $aControlador = [
         "iniciopublico" => "./controller/cInicioPublico.php",
@@ -17,7 +17,8 @@
         "registrarse"=>"./controller/cRegistrarse.php",
         "micuenta"=>"./controller/cMiCuenta.php",
         "changepassword"=>"./controller/cChangePassword.php",
-        "wip"=>"./controller/cWIP.php"
+        "wip"=>"./controller/cWIP.php",
+        "error"=>"./controller/cError.php"
     ];
     /*Vista*/
     $aVista = [
@@ -29,6 +30,7 @@
         "registrarse"=>"./view/vRegistrarse.php",
         "micuenta"=>"./view/vMiCuenta.php",
         "changepassword"=>"./view/vChangePassword.php",
-        "wip"=>"./view/vWIP.php"
+        "wip"=>"./view/vWIP.php",
+        "error"=>"./view/vError.php"
     ];
 ?>

@@ -1,7 +1,7 @@
 <?php
 class UsuarioPDO{
     public static function validadUsuario(string $codUsuario,string $password){
-        $conexion = new processDB(DSNMYSQL, USER, PASSWORD);
+        $conexion = new DBPDO(DSNMYSQL, USER, PASSWORD);
         $aUsuario=$conexion->executeQuery("SELECT * FROM T01_Usuario WHERE T01_CodUsuario='$codUsuario' AND T01_Password=SHA2('$password',256)");
         if(!$aUsuario){
             return null;
@@ -11,7 +11,7 @@ class UsuarioPDO{
         }
     }
     public static function altaUsuario(Usuario $usuario){
-        $conexion = new processDB(DSNMYSQL, USER, PASSWORD);
+        $conexion = new DBPDO(DSNMYSQL, USER, PASSWORD);
         $aDatosInsert = [[
             $usuario->codUsuario,
             $usuario->password,
@@ -24,7 +24,7 @@ class UsuarioPDO{
         return $conexion->executeUDI("INSERT INTO T01_Usuario values(?,?,?,?,?,?,?)",$aDatosInsert);
     }
     public static function modificarUsuario(Usuario $usuario,string $codUsuario=null){
-        $conexion = new processDB(DSNMYSQL, USER, PASSWORD);
+        $conexion = new DBPDO(DSNMYSQL, USER, PASSWORD);
         $aDatosUpdate=[
             "T01_CodUsuario='".$usuario->codUsuario."'",
             "T01_Password='".$usuario->password."'",
@@ -39,11 +39,11 @@ class UsuarioPDO{
         return $conexion->executeUDI("update T01_Usuario set $aDatosUpdate[0],$aDatosUpdate[1],$aDatosUpdate[2],$aDatosUpdate[3],$aDatosUpdate[4],$aDatosUpdate[5]   where T01_CodUsuario='$codUsuario'");
     }
     public static function borrarUsuario(string $codUsuario){
-        $conexion = new processDB(DSNMYSQL, USER, PASSWORD);
+        $conexion = new DBPDO(DSNMYSQL, USER, PASSWORD);
         return $conexion->executeUDI("delete from T01_Usuario where T01_CodUsuario='$codUsuario'");
     }
     public static function validarCodNoExiste(string $codUsuario){
-        $conexion = new processDB(DSNMYSQL, USER, PASSWORD);
+        $conexion = new DBPDO(DSNMYSQL, USER, PASSWORD);
         $usuario = $conexion->executeQuery("SELECT T01_CodUsuario FROM T01_Usuario WHERE T01_CodUsuario='$codUsuario'");
         if($usuario){
             return true;

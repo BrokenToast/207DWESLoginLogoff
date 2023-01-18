@@ -1,6 +1,6 @@
 <?php
 require_once('DBexception.php');
-class processDB{
+class DBPDO{
     /**
      * Clase que nos permite gestionar una base de datos.
      * @var PDO $oconexionDB Conexion a la base de datos
@@ -23,25 +23,18 @@ class processDB{
      */
     public function executeQuery(string $query){
         $this->__wakeup();
-        try{
-            $oResultado=$this->oConexionDB->query($query);
-            if($oResultado->rowCount()>1){
-                $aresultado = [];
+        $oResultado=$this->oConexionDB->query($query);
+        if($oResultado->rowCount()>1){
+            $aresultado = [];
+            $tupla=$oResultado->fetch(PDO::FETCH_ASSOC);
+            while(!is_bool($tupla)){
+                array_push($aresultado, $tupla);
                 $tupla=$oResultado->fetch(PDO::FETCH_ASSOC);
-                while(!is_bool($tupla)){
-                    array_push($aresultado, $tupla);
-                    $tupla=$oResultado->fetch(PDO::FETCH_ASSOC);
-                }
-                return $aresultado;
-            }else{
-                return $oResultado->fetch(PDO::FETCH_ASSOC);
             }
-        }catch(PDOException $error){
-            throw new DBexception($error);
-        }finally{
-            unset($oConexionDB);
+            return $aresultado;
+        }else{
+            return $oResultado->fetch(PDO::FETCH_ASSOC);
         }
-        
     }
     /**
      * executeUDI: Sirve para ejecutar un inserción o update o delete:

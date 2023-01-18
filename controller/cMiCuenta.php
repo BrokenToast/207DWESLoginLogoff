@@ -5,7 +5,7 @@
     'userExist'=>''
 ];
 $ok = "";
-$codUsuarioAnterior=$_SESSION['usuarioMiAplicacion']->codUsuario;
+$codUsuarioAnterior=$_SESSION['usuariologinlogoff207']->codUsuario;
 
 $usuario = "";
 if(isset($_REQUEST['changeUser'])){
@@ -19,16 +19,16 @@ if(isset($_REQUEST['changeUser'])){
     }
 }
 if($ok){
-    $_SESSION['usuarioMiAplicacion']->descUsuario=$_REQUEST['descUsuario'];
+    $_SESSION['usuariologinlogoff207']->descUsuario=$_REQUEST['descUsuario'];
     if(!UsuarioPDO::validarCodNoExiste("$_REQUEST[userName]")){
-        $_SESSION['usuarioMiAplicacion']->codUsuario = $_REQUEST['userName'];
+        $_SESSION['usuariologinlogoff207']->codUsuario = $_REQUEST['userName'];
     }else{
         $aErrores["codUser"] = "El nombre de usuario no esta disponible";
     }
-    UsuarioPDO::modificarUsuario($_SESSION['usuarioMiAplicacion'], $codUsuarioAnterior);
+    UsuarioPDO::modificarUsuario($_SESSION['usuariologinlogoff207'], $codUsuarioAnterior);
 }else{
     $okPassword = false;
-    if(empty(validacionFormularios::comprobarAlfaNumerico($_REQUEST['currentPassword']??null,16,3,1)) && !is_null(UsuarioPDO::validadUsuario($_SESSION['usuarioMiAplicacion']->codUsuario,$_REQUEST['currentPassword']))){
+    if(empty(validacionFormularios::comprobarAlfaNumerico($_REQUEST['currentPassword']??null,16,3,1)) && !is_null(UsuarioPDO::validadUsuario($_SESSION['usuariologinlogoff207']->codUsuario,$_REQUEST['currentPassword']))){
         $okPassword = true;
     }
     if(isset($_REQUEST['changePassword']) && $okPassword){
@@ -37,7 +37,7 @@ if($ok){
         header("Location: ./index.php");
     }
     if(isset($_REQUEST['borrar']) && $okPassword){
-        if(UsuarioPDO::borrarUsuario($_SESSION['usuarioMiAplicacion']->codUsuario)==1){
+        if(UsuarioPDO::borrarUsuario($_SESSION['usuariologinlogoff207']->codUsuario)==1){
             $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
             $_SESSION['paginaEnCurso'] = 'iniciopublico';
             header("Location: ./index.php");
@@ -46,10 +46,15 @@ if($ok){
 }
 
 if(isset($_REQUEST['volver'])){
-    $paginaAnterior=$_SESSION['paginaAnterior'];
-    $paginaEnCuerso = $_SESSION['paginaEnCurso'];
-    $_SESSION['paginaAnterior'] = $paginaEnCuerso;
-    $_SESSION['paginaEnCurso'] = $paginaAnterior;
+    $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
+    $_SESSION['paginaEnCurso'] = "inicioprivado";
     header('Location: ./index.php');
 }
+
+$aRespuestaMiCuenta = [];
+$aRespuestaMiCuenta['codUsuario']=$_SESSION['usuariologinlogoff207']->codUsuario;
+$aRespuestaMiCuenta['descUsuario']=$_SESSION['usuariologinlogoff207']->descUsuario;
+$aRespuestaMiCuenta['fechaHoraUltimaConexion']=$_SESSION['usuariologinlogoff207']->fechaHoraUltimaConexion->format('d-m-Y H:i:s');
+$aRespuestaMiCuenta['numAccesos']=$_SESSION['usuariologinlogoff207']->numAccesos;
+$aRespuestaMiCuenta['perfil'] = $_SESSION['usuariologinlogoff207']->perfil;
 require_once $aVista['layout'];
