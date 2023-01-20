@@ -17,7 +17,7 @@
         "detalles"=>"./controller/cDetalles.php",
         "registrarse"=>"./controller/cRegistrarse.php",
         "micuenta"=>"./controller/cMiCuenta.php",
-        "changepassword"=>"./controller/cChangePassword.php",
+        "changepassword"=>"./controller/cCambiarPassword.php",
         "wip"=>"./controller/cWIP.php",
         "error"=>"./controller/cError.php"
     ];
@@ -30,7 +30,7 @@
         "detalles"=>"./view/vDetalles.php",
         "registrarse"=>"./view/vRegistrarse.php",
         "micuenta"=>"./view/vMiCuenta.php",
-        "changepassword"=>"./view/vChangePassword.php",
+        "changepassword"=>"./view/vCambiarPassword.php",
         "wip"=>"./view/vWIP.php",
         "error"=>"./view/vError.php"
     ];

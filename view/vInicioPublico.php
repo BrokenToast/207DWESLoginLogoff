@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="./webroot/style/inicioPublico.css">
 <nav>
-    <label for="banderaIdiomas"><img src="./webroot/media/img/bandera.png" alt="Selecionar idioma"></label>
+    <label for="banderaIdiomas">⚐</label>
     <input type="checkbox" name="bandera" id="banderaIdiomas">
     <div id="selectLenguage">
         <form action="./index.php" method="post">
@@ -15,7 +15,7 @@
             <input type="submit" name="guardaridioma" value="guardar">
         </form>
     </div>
-    <form action="./index.php" method="post">
+    <form id="login" action="./index.php" method="post">
         <input type="submit" name="login" value="Login">
 
     </form>
