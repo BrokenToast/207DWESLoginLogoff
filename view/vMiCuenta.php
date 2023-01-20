@@ -33,8 +33,7 @@
                         <input disabled type="text" name="tipoPerfil" id="tipoPerfil" value="<?php echo $aRespuestaMiCuenta['perfil'];?>">
                     </td>
                 </tr>
-                <tr>  
-                    <td style="color:green;"><?php echo ($ok??false) ? "Se a modificado con exito" : ""; ?></td>     
+                <tr>   
                     <?php
                     foreach($aErrores ?? [] as $error){
                         if(!empty($error)){

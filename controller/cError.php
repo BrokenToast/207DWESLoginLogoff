@@ -10,6 +10,3 @@ $aRespuestaError['code'] = $_SESSION['error']->getCode();
 $aRespuestaError['mensaje'] = $_SESSION['error']->getMessage();
 
 require_once $aVista['layout'];
-
-//=================== Clase error============================
-

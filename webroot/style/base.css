@@ -1,9 +1,36 @@
-/*variable Globales*/
-:root{
-    /*Colores Globales*/
-    --colorMenuPie: #F7F8FA;
-    --colorContenido:#E5E5E5;
-    --tipografia:sans-serif;
-    /*Item Menu*/
+*{
+    margin: 0;padding: 0;
+    box-sizing: content-box;
+    font-size: var(--tipografia);
 }
-/*Globales*/
+#root{
+    width: 100vw;height: 100vh;
+    display: flex;
+    flex-flow: column;
+}
+/*Encabezado*/
+header{
+    flex: 0 0 12%;
+    display: flex;
+    justify-content: space-around;
+}
+header>img{
+    width: 150px;
+}
+header>h1{
+    font-size: 6em;
+}
+/*Contenido*/
+main{
+    flex: 1 1 100%;
+}
+/*Pie de pagina*/
+footer{
+    flex: 0 0 8%;
+    display:flex;
+    justify-content:space-around;
+}
+footer>*{
+    flex: 1 1 0;
+    align-self: center;
+}

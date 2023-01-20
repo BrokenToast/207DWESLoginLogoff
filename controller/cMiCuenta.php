@@ -26,6 +26,7 @@ if($ok){
         $aErrores["codUser"] = "El nombre de usuario no esta disponible";
     }
     UsuarioPDO::modificarUsuario($_SESSION['usuariologinlogoff207'], $codUsuarioAnterior);
+    header("Location: ./index.php");
 }else{
     $okPassword = false;
     if(empty(validacionFormularios::comprobarAlfaNumerico($_REQUEST['currentPassword']??null,16,3,1)) && !is_null(UsuarioPDO::validadUsuario($_SESSION['usuariologinlogoff207']->codUsuario,$_REQUEST['currentPassword']))){
