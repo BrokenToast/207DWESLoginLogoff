@@ -1,12 +1,14 @@
+<link rel="stylesheet" href="./webroot/style/inicioPrivado.css">
+<form method="./programa.php" id="menu" method="post">
+    <input type="submit" class="itemMenu" name="detalles" value="Detalles">
+    <input type="submit" class="itemMenu" name="mantenimiento" value="Mantenimiento Departamento">
+    <input type="submit" class="itemMenu" name="editar" value="Editar Perfil">
+    <input type="submit" class="itemMenu" name="error" value="Error">
+    <input type="submit" class="itemMenu" name="salir" value="Salir">
+</form>
 <section>
-    <h3><?php echo $aRespuestaInicioPrivado['idioma']?></h3>
-        <form method="./programa.php" method="post">
-            <input type="submit" name="detalles" value="Detalles">
-            <input type="submit" name="mantenimiento" value="Mantenimiento Departamento">
-            <input type="submit" name="editar" value="Editar Perfil">
-            <input type="submit" name="error" value="Error">
-            <input type="submit" name="salir" value="Salir">
-        </form>
+    <h2><?php echo $aRespuestaInicioPrivado['idioma']?></h2>
+    <h3><?php echo $aRespuestaInicioPrivado['descripcionUsuario']?></h3>
         <div>
             <p>
             <?php echo $aRespuestaInicioPrivado['mensajeNumConexiones']; ?>

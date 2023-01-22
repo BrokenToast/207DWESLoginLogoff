@@ -16,7 +16,7 @@ class UsuarioPDO{
             $usuario->codUsuario,
             $usuario->password,
             $usuario->descUsuario,
-            $usuario->fechaHoraUltimaConexion->getTimestamp(),
+            $usuario->getfechaHoraUltimaConexion()->getTimestamp(),
             $usuario->numAccesos,
             $usuario->perfil,
             0
@@ -29,7 +29,7 @@ class UsuarioPDO{
             "T01_CodUsuario='".$usuario->codUsuario."'",
             "T01_Password='".$usuario->password."'",
             "T01_DescUsuario='".$usuario->descUsuario."'",
-            "T01_FechaHoraUltimaConexion='".$usuario->fechaHoraUltimaConexion->getTimestamp()."'",
+            "T01_FechaHoraUltimaConexion='".$usuario->getfechaHoraUltimaConexion()->getTimestamp()."'",
             "T01_NumConexiones='".$usuario->numAccesos."'",
             "T01_Perfil='".$usuario->perfil."'",
         ];

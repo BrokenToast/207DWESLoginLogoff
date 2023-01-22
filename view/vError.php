@@ -1,10 +1,6 @@
-<section>
-    <form action="./index.php" method="post">
-        <input type="submit" name="volver" value="volver">
-    </form>
-    <article>
-        <h3>Error:<?php echo $aRespuestaError['code'];?></h3>
-        <p><?php echo $aRespuestaError['mensaje'];?></p>
-    </article>
-
-</section>
+<link rel="stylesheet" href="./webroot/style/wipError.css">
+<h1>Error:<?php echo $aRespuestaError['code'];?></h1>
+<h2><?php echo $aRespuestaError['mensaje'];?></h2>
+<form action="./index.php" method="post">
+    <input type="submit" class="buttom" name="volver" value="volver">
+</form>

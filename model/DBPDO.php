@@ -4,9 +4,9 @@ class DBPDO{
      * Clase que nos permite gestionar una base de datos.
      * 
      */
-    public readonly string $dsn;
-    public readonly string $user;
-    public readonly string $password;
+    public string $dsn;
+    public string $user;
+    public string $password;
     private PDO $oConexionDB;
 
     public function __construct($dsn,$user,$password){

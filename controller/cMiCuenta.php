@@ -55,7 +55,7 @@ if(isset($_REQUEST['volver'])){
 $aRespuestaMiCuenta = [];
 $aRespuestaMiCuenta['codUsuario']=$_SESSION['usuariologinlogoff207']->codUsuario;
 $aRespuestaMiCuenta['descUsuario']=$_SESSION['usuariologinlogoff207']->descUsuario;
-$aRespuestaMiCuenta['fechaHoraUltimaConexion']=$_SESSION['usuariologinlogoff207']->fechaHoraUltimaConexion->format('d-m-Y H:i:s');
+$aRespuestaMiCuenta['fechaHoraUltimaConexion']=$_SESSION['usuariologinlogoff207']->getfechaHoraUltimaConexionAnterior()->format('d-m-Y H:i:s');
 $aRespuestaMiCuenta['numAccesos']=$_SESSION['usuariologinlogoff207']->numAccesos;
 $aRespuestaMiCuenta['perfil'] = $_SESSION['usuariologinlogoff207']->perfil;
 require_once $aVista['layout'];

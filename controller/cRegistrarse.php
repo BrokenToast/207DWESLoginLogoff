@@ -1,39 +1,5 @@
 <?php
 $ok = "";
-$aSelectorIdioma = [
-    ['es', 'Español'],
-    ['ct', 'Catalan'],
-    ['pt', 'Portugues'],
-    ['gl', 'Gallego']
-];
-if(isset($_COOKIE['idioma'])){
-    switch ($_COOKIE['idioma']) {
-        case 'ct':
-            $aSelectorIdioma = [
-                ['ct', 'Catalan'],
-                ['es', 'Español'],
-                ['pt', 'Portugues'],
-                ['gl', 'Gallego']
-            ];
-            break;
-        case 'pt':
-            $aSelectorIdioma = [
-                ['pt', 'Portugues'],
-                ['es', 'Español'],
-                ['ct', 'Catalan'],
-                ['gl', 'Gallego']
-            ];
-            break;
-        case 'gl':
-            $aSelectorIdioma = [
-                ['gl', 'Gallego'],
-                ['es', 'Español'],
-                ['ct', 'Catalan'],
-                ['pt', 'Portugues']
-            ];
-            break;
-    }
-}
 if(isset($_REQUEST['registrar'])){
     $ok = true;
     $aErrores['usuario']=validacionFormularios::comprobarAlfabetico($_REQUEST['usuario'],30,2,1);

@@ -1,6 +1,7 @@
+<link rel="stylesheet" href="./webroot/style/detalle.css">
 <section>
     <form action="./index.php" method="post">
-        <input type="submit" name="volver" value="volver">
+        <input type="submit" name="volver" class="buttom" value="volver">
     </form>
     <article>
         <?php
@@ -13,31 +14,35 @@
             //Recorrido con un foreach la variable superglobal $_SERVER
             function printTable(array $dateTable, string $nameTable){
                 ?><table>
-                    <tr>
-                        <th colspan="2"><?php print $nameTable; ?></th>
-                    </tr>
-                    <tr>
-                        <th>Clave </th>
-                        <th>Valor</th>
-                    </tr>
-                    <?php 
-                        foreach($dateTable as $clave=>$valor){
-                            ?>  
-                            <tr>
-                                <td><?php print $clave; ?></td>
-                                <td>
-                                    <?php
-                                        if(is_array($valor)){
-                                            printTable($valor,$clave);
-                                        }else{
-                                            print_r($valor);
-                                        }
-                                    ?>
-                                </td>
-                            </tr>
-                            <?php
-                        }
-                    ?>
+                    <thead>
+                        <tr>
+                            <th colspan="2"><?php print $nameTable; ?></th>
+                        </tr>
+                        <tr>
+                            <th>Clave </th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            foreach($dateTable as $clave=>$valor){
+                                ?>  
+                                <tr>
+                                    <td><?php print $clave; ?></td>
+                                    <td>
+                                        <?php
+                                            if(is_array($valor)){
+                                                printTable($valor,$clave);
+                                            }else{
+                                                print_r($valor);
+                                            }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        ?>
+                    </tbody>
                 </table> 
                 <?php
             }
@@ -59,12 +64,16 @@
                     if(empty($aGlobalVar)){
                         ?>
                         <table>
-                            <tr>
-                                <th><?php print $nameGlobalVar; ?></th>
-                            </tr>
-                            <tr>
-                                <td>Esta vacia</td>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th><?php print $nameGlobalVar; ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Esta vacia</td>
+                                </tr>
+                            </tbody>
                         </table> 
                         <?php
                     }else{
@@ -73,6 +82,6 @@
                     }
                 }
             ?>
-            <?php phpinfo() ?>
     </article>
+    <?php phpinfo() ?>
 </section>

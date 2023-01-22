@@ -17,7 +17,6 @@
     </div>
     <form id="login" action="./index.php" method="post">
         <input type="submit" name="login" value="Login">
-
     </form>
 </nav>
 <section>

@@ -4,8 +4,8 @@ class Usuario{
     public string $password;
     public string $descUsuario;
     public int $numAccesos;
-    public readonly DateTime $fechaHoraUltimaConexion;
-    public readonly DateTime $fechaHoraUltimaConexionAnterior;
+    private DateTime $fechaHoraUltimaConexion;
+    private DateTime $fechaHoraUltimaConexionAnterior;
     public string $perfil;
     public function __construct(string $codUsuario,string $password,string $descUsuario, int $numAccesos,int $fechaHoraUltimaConexion,int $fechaHoraUltimaConexionAnterior,string $perfil){
         
@@ -21,4 +21,11 @@ class Usuario{
         $this->fechaHoraUltimaConexionAnterior=$fechaAnterior;
         $this->perfil=$perfil;
     }
+    public function getfechaHoraUltimaConexion(){
+        return $this->fechaHoraUltimaConexion;
+    }
+    public function getfechaHoraUltimaConexionAnterior(){
+      return $this->fechaHoraUltimaConexionAnterior;
+    }
+
 }
