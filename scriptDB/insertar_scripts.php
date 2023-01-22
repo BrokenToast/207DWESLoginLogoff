@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../webroot/style/reset.css">
-    <link rel="stylesheet" href="../webroot/style/style.css">
-    <link rel="stylesheet" href="../webroot/style/codigo.css">
     <title>Ejecutar Script</title>
 </head>
 <body>
@@ -19,7 +16,8 @@
         require_once '../config/confConexion.php';
         if(isset($_REQUEST['ejecutar'])){
             // Cambiar estos parametros
-            exec($_REQUEST['gdb']." -h ".HOST." -u dbu263643 --password=".PASSWORD. "<" .$_REQUEST['script'],$respuesta);
+            $comando=$_REQUEST['gdb']." -h ".HOST." -u ".USER." --password=".PASSWORD. "<" .$_REQUEST['script'];
+            exec($comando,$respuesta);
             foreach($respuesta as $valor){
                 print $valor;
             }
@@ -34,8 +32,8 @@
                     <td><p>Gestor de bases de datos:</p></td>
                     <td>
                         <select name="gdb">
-                            <option value="mariadb">Mariadb</option>
                             <option value="mysql">Mysql</option>
+                            <option value="mariadb">Mariadb</option>
                         </select>
                     </td>
                 </tr>
@@ -43,13 +41,13 @@
                     <td><p>Scripts:</p></td>
                     <td>
                         <select name="script">
-                            <option value="./BorraDB207DWESLoginLogoffTema5.sql">BorraDB207DWESproyectoTema5</option>
-                            <option value="./CargaInicialDB207DWESLoginLogoffTema5.sql">CargaInicialDB207DWESproyectoTema5</option>
-                            <option value="./CreaDB207DWESLoginLogoffTema5.sql">CreaDB207DWESproyectoTema5</option>
+                            <option value="./BorraDB207DWESLoginLogoff.sql">BorraDB207DWESproyecto</option>
+                            <option value="./CargaInicialDB207DWESLoginLogoff.sql">CargaInicialDB207DWESproyecto</option>
+                            <option value="./CreaDB207DWESLoginLogoff.sql">CreaDB207DWESproyecto</option>
 
-                            <option value="./BorraDB207DWESLoginLogoffTema5Explotacion.sql">BorraDB207DWESproyectoTema5Explotacion</option>
-                            <option value="./CargaInicialDB207DWESLoginLogoffTema5Explotacion.sql">CargaInicialDB207DWESproyectoTema5Explotacion</option>
-                            <option value="./CreaDB207DWESLoginLogoffTema5Explotacion.sql">CreaDB207DWESproyectoTema5Explotacion</option>
+                            <option value="./BorraDB207DWESLoginLogoffExplotacion.sql">BorraDB207DWESproyectoExplotacion</option>
+                            <option value="./CargaInicialDB207DWESLoginLogoffExplotacion.sql">CargaInicialDB207DWESproyectoExplotacion</option>
+                            <option value="./CreaDB207DWESLoginLogoffExplotacion.sql">CreaDB207DWESproyectoExplotacion</option>
                         </select>
                     </td>
                 </tr>
@@ -64,14 +62,12 @@
                 </tr>
             </table>
         </form> 
-    <?php
-    ?>
         </article>
     </section>
     <footer>
             <p>Creado por Luis Pérez Astorga | Licencia GPL</p>
-            <a href="../../../index.html"><img src="../../../doc/logo_Casa.png" alt="Pagina creador"></a>
-            <a href="../index.php"><img src="../../../doc/atras.svg" alt="Atras"/></a>
+            <a href="../../../index.html"><img src="../../../doc/logo_Casa.png" alt="Pagina creador" width="50" height="50"></a>
+            <a href="../index.php"><img src="../../../doc/atras.svg" alt="Atras" width="50" height="50"/></a>
     </footer>
 </body>
 </html>

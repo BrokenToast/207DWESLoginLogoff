@@ -1,7 +1,7 @@
 CREATE DATABASE if not exists DB207DWESLoginLogoff;
 create user if not exists 'userDAW207DBLoginLogoff'@'%' IDENTIFIED BY 'paso';
 use DB207DWESLoginLogoff;
-create table if not exists T02_Usuario(
+create table if not exists T01_Usuario(
 	T01_CodUsuario VARCHAR(20) PRIMARY KEY,
     T01_Password VARCHAR(256) not null,
     T01_DescUsuario VARCHAR(255) not null,
