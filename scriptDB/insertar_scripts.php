@@ -13,7 +13,7 @@
     <section>
         <article>
         <?php
-        require_once '../config/confConexion.php';
+        require_once '../config/confDBPDO.php';
         if(isset($_REQUEST['ejecutar'])){
             // Cambiar estos parametros
             $comando=$_REQUEST['gdb']." -h ".HOST." -u ".USER." --password=".PASSWORD. "<" .$_REQUEST['script'];
