@@ -4,6 +4,7 @@ if(isset($_REQUEST['volver'])){
     $paginaEnCuerso = $_SESSION['paginaEnCurso'];
     $_SESSION['paginaAnterior'] = $paginaEnCuerso;
     $_SESSION['paginaEnCurso'] = $paginaAnterior;
+    unset($_SESSION['error']);
     header('Location: ./index.php');
 }
 $aRespuestaError['code'] = $_SESSION['error']->getCode();
