@@ -5,5 +5,6 @@ if(isset($_REQUEST['volver'])){
     $_SESSION['paginaAnterior'] = $paginaEnCuerso;
     $_SESSION['paginaEnCurso'] = $paginaAnterior;
     header('Location: ./index.php');
+    exit;
 }
 require_once $aVista['layout'];

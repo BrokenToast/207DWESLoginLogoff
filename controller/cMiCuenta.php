@@ -6,7 +6,6 @@
 ];
 $ok = "";
 $codUsuarioAnterior=$_SESSION['usuariologinlogoff207']->codUsuario;
-
 $usuario = "";
 if(isset($_REQUEST['changeUser'])){
     $ok = true;
@@ -27,6 +26,7 @@ if($ok){
     }
     UsuarioPDO::modificarUsuario($_SESSION['usuariologinlogoff207'], $codUsuarioAnterior);
     header("Location: ./index.php");
+    exit;
 }else{
     $okPassword = false;
     if(empty(validacionFormularios::comprobarAlfaNumerico($_REQUEST['currentPassword']??null,16,3,1)) && !is_null(UsuarioPDO::validadUsuario($_SESSION['usuariologinlogoff207']->codUsuario,$_REQUEST['currentPassword']))){
@@ -42,16 +42,16 @@ if($ok){
             $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
             $_SESSION['paginaEnCurso'] = 'iniciopublico';
             header("Location: ./index.php");
+            exit;
         }
     }
 }
-
 if(isset($_REQUEST['volver'])){
     $_SESSION['paginaAnterior'] = $_SESSION['paginaEnCurso'];
     $_SESSION['paginaEnCurso'] = "inicioprivado";
     header('Location: ./index.php');
+    exit;
 }
-
 $aRespuestaMiCuenta = [];
 $aRespuestaMiCuenta['codUsuario']=$_SESSION['usuariologinlogoff207']->codUsuario;
 $aRespuestaMiCuenta['descUsuario']=$_SESSION['usuariologinlogoff207']->descUsuario;

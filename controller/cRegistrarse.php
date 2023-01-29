@@ -17,6 +17,7 @@ if ($ok ) {
         UsuarioPDO::altaUsuario($oUsuario);
         $_SESSION['paginaEnCurso'] = 'inicioprivado';
         header("Location: ./index.php");
+        exit;
     }else{
         $aErrores['usuario'] = "ya existe";
     }
@@ -27,5 +28,6 @@ if(isset($_REQUEST['volver'])){
     $_SESSION['paginaAnterior'] = $paginaEnCuerso;
     $_SESSION['paginaEnCurso'] = $paginaAnterior;
     header('Location: ./index.php');
+    exit;
 }
 require_once $aVista['layout'];
