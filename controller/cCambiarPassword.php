@@ -13,7 +13,7 @@ if(isset($_REQUEST['cambiar'])){
     }
     foreach($aErrores as $value){
         if(!empty($value)){
-        $ok = false;        
+        $ok = false;
         }
     }
 }
@@ -22,6 +22,7 @@ if($ok){
     UsuarioPDO::modificarUsuario($_SESSION['usuariologinlogoff207'],$_SESSION['usuariologinlogoff207']->codUsuario);
     $_SESSION['paginaEnCurso']="micuenta";
     header("Location: ./index.php");
+    exit;
 }
 if(isset($_REQUEST['volver'])){
     $paginaAnterior=$_SESSION['paginaAnterior'];
@@ -29,5 +30,6 @@ if(isset($_REQUEST['volver'])){
     $_SESSION['paginaAnterior'] = $paginaEnCuerso;
     $_SESSION['paginaEnCurso'] = $paginaAnterior;
     header('Location: ./index.php');
+    exit;
 }
 require_once $aVista['layout'];
